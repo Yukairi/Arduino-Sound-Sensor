@@ -10,8 +10,7 @@ unsigned int sample;
 #define PIN_MODERATE 5
 #define PIN_LOUD 6
 
-void setup()
-{
+void setup() {
   pinMode(SENSOR_PIN, INPUT); // Set the signal pin as input
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(PIN_MODERATE, OUTPUT);
@@ -29,8 +28,7 @@ void setup()
   lcd.clear();
 }
 
-void loop()
-{
+void loop() {
   unsigned long startMillis = millis(); // Start of sample window
   float peakToPeak = 0;                 // peak-to-peak level
 
@@ -38,17 +36,12 @@ void loop()
   unsigned int signalMin = 1024; // maximum value
 
                                 // collect data for 50 mS
-  while (millis() - startMillis < sampleWindow)
-  {
+  while (millis() - startMillis < sampleWindow) {
     sample = analogRead(SENSOR_PIN); // get reading from microphone
-    if (sample < 1024)               // toss out spurious readings
-    {
-      if (sample > signalMax)
-      {
+    if (sample < 1024) {             // toss out spurious readings
+      if (sample > signalMax) {
         signalMax = sample; // save just the max levels
-      }
-      else if (sample < signalMin)
-      {
+      } else if (sample < signalMin) {
         signalMin = sample; // save just the min levels
       }
     }
@@ -62,8 +55,7 @@ void loop()
   lcd.print(db);
   lcd.print("dB");
 
-  if (db <= 60)
-  {
+  if (db <= 60) {
     lcd.setCursor(0, 1);
     lcd.print("Level: Quiet");
     Serial.println("Level: Low");
@@ -71,9 +63,7 @@ void loop()
     digitalWrite(PIN_MODERATE, LOW);
     digitalWrite(PIN_LOUD, LOW);
     delay(1000);
-  }
-  else if (db > 60 && db < 85)
-  {
+  } else if (db > 60 && db < 85) {
     lcd.setCursor(0, 1);
     lcd.print("Level: Moderate");
     Serial.println("Level: Moderate");
@@ -82,9 +72,7 @@ void loop()
     digitalWrite(PIN_LOUD, LOW);
     delay(1000);
     digitalWrite(BUZZER_PIN, LOW); // Turn off the buzzer
-  }
-  else if (db >= 85)
-  {
+  } else if (db >= 85) {
     lcd.setCursor(0, 1);
     lcd.print("Level: High");
     Serial.println("Level: High!");
