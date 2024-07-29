@@ -1,22 +1,48 @@
 Sound Level Meter
 This project uses an Arduino to measure sound levels using a microphone and displays the loudness in decibels (dB) on an LCD screen. Depending on the measured sound level, it also controls a buzzer and LED indicators to signify different levels of noise.
 
-Components
-Arduino Uno
-Microphone sensor
-LCD display (I2C)
-Buzzer
-LEDs (2x for different sound levels)
-Resistors
-Jumper wires
-Breadboard
-Circuit Diagram
-Pin Connections
-Microphone Sensor: Connect the analog output to A0 on the Arduino.
-LCD Display: Connect using I2C (SDA to A4, SCL to A5 on the Arduino Uno).
-Buzzer: Connect the positive leg to digital pin 4 and the negative leg to GND.
-LED for Moderate Level: Connect the positive leg to digital pin 5 (use a resistor in series) and the negative leg to GND.
-LED for Loud Level: Connect the positive leg to digital pin 6 (use a resistor in series) and the negative leg to GND.
-Libraries
-Wire.h for I2C communication.
-LiquidCrystal_I2C.h for the LCD display.
+-Components-
+*Arduino Uno
+*Microphone sensor
+*LCD display (I2C)
+*Buzzer
+*LEDs (2x for different sound levels)
+*Resistors
+*Jumper wires
+*Breadboard
+-Circuit Diagram-
+*Pin Connections
+*Microphone Sensor: Connect the analog output to A0 on the Arduino.
+*LCD Display: Connect using I2C (SDA to A4, SCL to A5 on the Arduino Uno).
+*Buzzer: Connect the positive leg to digital pin 4 and the negative leg to GND.
+*LED for Moderate Level: Connect the positive leg to digital pin 5 (use a resistor in series) and the negative leg to GND.
+*LED for Loud Level: Connect the positive leg to digital pin 6 (use a resistor in series) and the negative leg to GND.
+-Libraries-
+*Wire.h for I2C communication.
+*LiquidCrystal_I2C.h for the LCD display.
+
+-How It Works-
+Setup: The code initializes the sensor, buzzer, LEDs, and the LCD display.
+Loop:
+It samples the microphone input for a 50 ms window.
+Calculates the peak-to-peak amplitude of the sound signal.
+Maps the amplitude to a dB value.
+Displays the dB value on the LCD.
+Based on the dB value, it determines the sound level (Quiet, Moderate, High) and controls the buzzer and LEDs accordingly.
+
+-Usage-
+Assemble the components according to the circuit diagram.
+Upload the code to the Arduino.
+Observe the LCD for loudness readings and the LEDs for level indications.
+The buzzer will sound for moderate and high noise levels.
+
+-Troubleshooting-
+Ensure all connections are correct and secure.
+Verify the I2C address of the LCD display.
+Adjust the microphone sensitivity if needed.
+
+
+This project demonstrates how to build a simple sound level meter with visual and audio indicators, providing a practical introduction to analog signal processing with Arduino.
+
+
+
